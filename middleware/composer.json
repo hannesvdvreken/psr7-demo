@@ -1,0 +1,6 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.0",
+        "maximebf/debugbar": "^1.10"
+    }
+}
