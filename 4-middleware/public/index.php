@@ -31,7 +31,7 @@ $stack->unshift(function (callable $handler) use ($timeline) {
 });
 
 // List of profiles to retrieve
-$usernames = ['tijsverkoyen', 'woutersioen', 'dhaemer', 'jenssegers', 'hannesvdvreken'];
+$usernames = ['dieterve', 'anahkiasen', 'andreascreten', 'hannesvdvreken', 'tonysm'];
 $promises = [];
 
 // Guzzle client
@@ -40,21 +40,23 @@ $client = new GuzzleHttp\Client(['handler' => $stack]);
 // Send all requests.
 foreach ($usernames as $username) {
     $url = 'https://api.github.com/users/'.$username;
-    $headers = ['Authorization' => 'token '.getenv('GITHUB_TOKEN')];
-    $promises[] = $client->requestAsync('GET', $url, ['headers' => $headers]);
+    $promises[] = $client->requestAsync('GET', $url);
 }
 
+// Declare variable.
+$profiles = [];
+
 // Wait till all the requests are finished.
-$promise = GuzzleHttp\Promise\all($promises)->then(function (array $responses) {
+$promise = GuzzleHttp\Promise\all($promises)->then(function (array $responses) use (&$profiles) {
     $profiles = array_map(function (ResponseInterface $response) {
         return json_decode($response->getBody(), true);
     }, $responses);
-
-    var_dump($profiles);
 })->wait();
 
 // Setup base url
 $debugbar->getJavascriptRenderer()->setBaseUrl('http://192.168.10.10:8001/');
+
+$encodedProfiles = nl2br(json_encode($profiles, JSON_PRETTY_PRINT));
 
 // Output HTML
 echo
@@ -63,6 +65,7 @@ echo
     {$debugbar->getJavascriptRenderer()->renderHead()}
 </head>
 <body>
+    {$encodedProfiles}
     {$debugbar->getJavascriptRenderer()->render()}
 </body>
 </html>";

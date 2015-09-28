@@ -1,8 +1,6 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^6.0",
-        "symfony/http-foundation": "^2.7",
-        "symfony/psr-http-message-bridge": "^0.2.0",
         "zendframework/zend-diactoros": "^1.1"
     }
 }
