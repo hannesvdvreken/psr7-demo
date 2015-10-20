@@ -6,11 +6,10 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
 // Modify the request object
 $uri = $request->getUri();
-$request = $request->withUri(
-    $uri->withHost('api.github.com')
-        ->withScheme('https')
-        ->withPort(443)
-);
+$uri = $uri->withHost('api.github.com')
+    ->withScheme('https')
+    ->withPort(443);
+$request = $request->withUri($uri);
 
 //$request = $request->withHeader('Authorization', 'token '.getenv('GITHUB_TOKEN'));
 
