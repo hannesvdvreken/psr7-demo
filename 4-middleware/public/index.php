@@ -14,21 +14,10 @@ $timeline = $debugbar->getCollector('time');
 // Setting up the stack off middlewares
 $stack = GuzzleHttp\HandlerStack::create();
 
-$stack->unshift(function (callable $handler) use ($timeline) {
-    return function (RequestInterface $request, array $options) use ($handler, $timeline) {
-        // Before
-        $start = microtime(true);
+$profiler = new GuzzleHttp\Profiling\Debugbar\Profiler($timeline);
+$middleware = new GuzzleHttp\Profiling\Middleware($profiler);
 
-        return $handler($request, $options)
-            ->then(function (ResponseInterface $response) use ($request, $timeline, $start) {
-                // After
-                $label = $request->getMethod().' '.$request->getUri();
-                $timeline->addMeasure($label, $start, microtime(true));
-
-                return $response;
-            });
-    };
-});
+$stack->unshift($middleware);
 
 // List of profiles to retrieve
 $usernames = ['dieterve', 'anahkiasen', 'andreascreten', 'hannesvdvreken', 'tonysm'];

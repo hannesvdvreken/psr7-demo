@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0fd50a273b93dc3efcf2c5d58459d3aa",
+    "hash": "020cc5139717688d437a31be492cb671",
+    "content-hash": "4ec690b2f1f82b6ed7e24bf732153f1d",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -176,6 +177,114 @@
                 "uri"
             ],
             "time": "2015-06-24 19:55:15"
+        },
+        {
+            "name": "hannesvdvreken/guzzle-debugbar",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hannesvdvreken/guzzle-debugbar.git",
+                "reference": "edd3dd1847efa14cdfa8d22a18eb68a9164446ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hannesvdvreken/guzzle-debugbar/zipball/edd3dd1847efa14cdfa8d22a18eb68a9164446ec",
+                "reference": "edd3dd1847efa14cdfa8d22a18eb68a9164446ec",
+                "shasum": ""
+            },
+            "require": {
+                "hannesvdvreken/guzzle-profiler": "^1.0",
+                "maximebf/debugbar": "^1.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10",
+                "illuminate/support": "~4|~5",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Profiling\\Debugbar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                },
+                {
+                    "name": "Hannes Van De Vreken",
+                    "email": "vandevreken.hannes@gmail.com"
+                }
+            ],
+            "description": "A Guzzle middleware that logs requests to debugbar's timeline",
+            "keywords": [
+                "Guzzle",
+                "debugbar",
+                "http",
+                "log",
+                "middleware",
+                "php",
+                "profiler",
+                "profiling"
+            ],
+            "time": "2015-11-25 15:42:55"
+        },
+        {
+            "name": "hannesvdvreken/guzzle-profiler",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hannesvdvreken/guzzle-profiler.git",
+                "reference": "b08bfb5c5ad07fb6bee910af34d54cf37199b2b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hannesvdvreken/guzzle-profiler/zipball/b08bfb5c5ad07fb6bee910af34d54cf37199b2b3",
+                "reference": "b08bfb5c5ad07fb6bee910af34d54cf37199b2b3",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Profiling\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hannes Van De Vreken",
+                    "email": "vandevreken.hannes@gmail.com"
+                }
+            ],
+            "description": "A Guzzle middleware that profiles requests made by the client.",
+            "keywords": [
+                "Guzzle",
+                "debug",
+                "http",
+                "log",
+                "middleware",
+                "profiler",
+                "profiling",
+                "timeline"
+            ],
+            "time": "2015-11-25 10:07:26"
         },
         {
             "name": "maximebf/debugbar",
