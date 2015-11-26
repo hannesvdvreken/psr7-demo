@@ -5,7 +5,7 @@ use Psr\Http\Message\ResponseInterface;
 require '../vendor/autoload.php';
 
 // List of profiles to retrieve
-$usernames = ['dieterve', 'anahkiasen', 'andreascreten', 'hannesvdvreken', 'tonysm'];
+$usernames = ['toonketels', 'dirkbonhomme', 'hannesvdvreken', 'brammm', 'andreascreten'];
 $promises = [];
 
 // Guzzle client
@@ -30,5 +30,7 @@ $promise = GuzzleHttp\Promise\all($promises)->then(function (array $responses) u
 $response = new Zend\Diactoros\Response();
 
 $response->getBody()->write(json_encode($profiles));
+
+$response = $response->withHeader('Content-type', 'application/json');
 
 (new \Zend\Diactoros\Response\SapiEmitter())->emit($response);

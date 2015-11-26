@@ -1,0 +1,13 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.0",
+        "zendframework/zend-diactoros": "^1.0.4",
+        "hannesvdvreken/guzzle-debugbar": "^2.0",
+        "php-http/guzzle6-adapter": "^0.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Github\\": "5-github/src"
+        }
+    }
+}

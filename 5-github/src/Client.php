@@ -2,7 +2,8 @@
 namespace Github;
 
 use Github\Entities\User;
-use Http\Client\HttpClient;
+use GuzzleHttp\Psr7\Request;
+use Http\Adapter\HttpAdapter;
 
 class Client implements ClientInterface
 {
@@ -12,16 +13,18 @@ class Client implements ClientInterface
     private $base = 'https://api.github.com';
 
     /**
-     * @var \Http\Client\HttpClient
+     * @var HttpAdapter
      */
-    private $client;
+    private $adapter;
 
     /**
-     * @param \Http\Client\HttpClient $client
+     * Client constructor.
+     *
+     * @param HttpAdapter $adapter
      */
-    public function __construct(HttpClient $client)
+    public function __construct(HttpAdapter $adapter)
     {
-        $this->client = $client;
+        $this->adapter = $adapter;
     }
 
     /**
@@ -33,9 +36,7 @@ class Client implements ClientInterface
     {
         $url = $this->base.'/users/'.$username;
 
-        $headers = ['Authorization' => 'token '.getenv('GITHUB_TOKEN')];
-
-        $response = $this->client->get($url, $headers);
+        $response = $this->adapter->sendRequest(new Request('GET', $url));
 
         $body = (string) $response->getBody();
 
