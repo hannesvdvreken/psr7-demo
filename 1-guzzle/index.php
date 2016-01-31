@@ -9,14 +9,16 @@ $uri = $request->getUri();
 $uri = $uri->withHost('api.github.com')
     ->withScheme('https')
     ->withPort(443);
-$request = $request->withUri($uri);
-
-//$request = $request->withHeader('Authorization', 'token '.getenv('GITHUB_TOKEN'));
+$request = $request
+    ->withUri($uri)
+    ->withHeader('Authorization', 'token '.getenv('GITHUB_TOKEN'));
 
 // Execute the request
 $response = (new GuzzleHttp\Client())->send($request);
 
 // Remove these response headers, because guzzle will automatically decode the content.
-$response = $response->withoutHeader('Transfer-Encoding')->withoutHeader('Content-Encoding');
+$response = $response
+    ->withoutHeader('Transfer-Encoding')
+    ->withoutHeader('Content-Encoding');
 
 (new Zend\Diactoros\Response\SapiEmitter())->emit($response);

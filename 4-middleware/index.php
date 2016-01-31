@@ -29,7 +29,9 @@ $client = new GuzzleHttp\Client(['handler' => $stack]);
 // Send all requests.
 foreach ($usernames as $username) {
     $url = 'https://api.github.com/users/'.$username;
-    $promises[] = $client->requestAsync('GET', $url);
+    $request = new \GuzzleHttp\Psr7\Request('GET', $url);
+    $request = $request->withHeader('Authorization', 'token '.getenv('GITHUB_TOKEN'));
+    $promises[] = $client->sendAsync($request);
 }
 
 // Declare variable.
