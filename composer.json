@@ -1,13 +1,20 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^6.0",
-        "zendframework/zend-diactoros": "^1.0.4",
         "hannesvdvreken/guzzle-debugbar": "^2.0",
-        "php-http/guzzle6-adapter": "^0.1.0"
+        "oscarotero/psr7-middlewares": "^3.13",
+        "php-http/guzzle6-adapter": "^0.1.0",
+        "relay/relay": "^1.1",
+        "zendframework/zend-diactoros": "^1.0.4"
     },
     "autoload": {
         "psr-4": {
-            "Github\\": "5-github/src"
+            "Github\\": "5-github/src",
+            "Demo1\\": "1-guzzle/src",
+            "Demo2\\": "2-promise/src",
+            "Demo3\\": "3-multi/src",
+            "Demo4\\": "4-middleware/src",
+            "Demo6\\": "6-middleware/src"
         }
     }
 }

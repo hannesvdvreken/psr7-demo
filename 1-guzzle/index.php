@@ -2,23 +2,17 @@
 
 require '../vendor/autoload.php';
 
+// Make ServerRequest object.
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
-// Modify the request object
-$uri = $request->getUri();
-$uri = $uri->withHost('api.github.com')
-    ->withScheme('https')
-    ->withPort(443);
-$request = $request
-    ->withUri($uri)
-    ->withHeader('Authorization', 'token '.getenv('GITHUB_TOKEN'));
+$handler = GuzzleHttp\HandlerStack::create();
+$handler->push(Demo1\GithubAuth::create());
 
-// Execute the request
-$response = (new GuzzleHttp\Client())->send($request);
+// Boot application.
+$controller = new Demo1\Controller(new GuzzleHttp\Client(compact('handler')));
 
-// Remove these response headers, because guzzle will automatically decode the content.
-$response = $response
-    ->withoutHeader('Transfer-Encoding')
-    ->withoutHeader('Content-Encoding');
+// Let application do the magic.
+$response = $controller->index($request);
 
+// Output Response.
 (new Zend\Diactoros\Response\SapiEmitter())->emit($response);

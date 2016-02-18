@@ -1,29 +1,18 @@
 <?php
 
-use Psr\Http\Message\ResponseInterface;
-
 require '../vendor/autoload.php';
 
-// Create the request.
-$request = \Zend\Diactoros\ServerRequestFactory::fromGlobals();
+// Make ServerRequest object.
+$request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
-// Modify the request object.
-$uri = $request->getUri();
-$request = $request->withUri(
-    $uri->withHost('api.github.com')
-        ->withScheme('https')
-        ->withPort(443)
-);
+$handler = GuzzleHttp\HandlerStack::create();
+$handler->push(Demo1\GithubAuth::create());
 
-// Guzzle client.
-$client = new GuzzleHttp\Client();
+// Boot application.
+$controller = new Demo2\Controller(new GuzzleHttp\Client(compact('handler')));
 
-// Execute the request.
-$promise = $client->sendAsync($request)->then(function (ResponseInterface $response) {
-    // Remove these response headers, because guzzle will automatically decode the content.
-    $response = $response->withoutHeader('Transfer-Encoding')->withoutHeader('Content-Encoding');
+// Let application do the magic.
+$response = $controller->index($request);
 
-    (new \Zend\Diactoros\Response\SapiEmitter())->emit($response);
-});
-
-$promise->wait();
+// Output Response.
+(new Zend\Diactoros\Response\SapiEmitter())->emit($response);
