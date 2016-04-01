@@ -1,15 +1,14 @@
 <?php
 namespace Demo6;
 
-use Zend\Diactoros\Response;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Controller
 {
-    public function index()
+    public function index(RequestInterface $request, ResponseInterface $response)
     {
-        $response = new Response();
-
-        $response->getBody()->write("<h1>You're in!</h1>");
+        $response->getBody()->write("<h1>".(string) $request->getUri()."</h1>");
 
         return $response->withHeader('Content-Type', 'text/html');
     }
