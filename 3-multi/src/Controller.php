@@ -41,6 +41,6 @@ class Controller
         $response->getBody()->write(json_encode($this->profiles));
 
         return $response
-            ->withHeader('Content-type', 'application/json');
+            ->withHeader('Content-Type', 'application/json');
     }
 }
