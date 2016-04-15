@@ -14,7 +14,8 @@
             "Demo2\\": "2-promise/src",
             "Demo3\\": "3-multi/src",
             "Demo4\\": "4-middleware/src",
-            "Demo6\\": "6-middleware/src"
+            "Demo6\\": "6-concurrency/src",
+            "Demo7\\": "7-middleware/src"
         }
     }
 }

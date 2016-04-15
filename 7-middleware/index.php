@@ -6,7 +6,7 @@ require '../vendor/autoload.php';
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
 // Boot application.
-$controller = new Demo6\Controller();
+$controller = new Demo7\Controller();
 
 $middleware1 = new \Psr7Middlewares\Middleware\BasicAuthentication(['phpuk' => 'newrelic']);
 $router = [$controller, 'index'];
