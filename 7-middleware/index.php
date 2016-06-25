@@ -1,25 +1,28 @@
 <?php
 
+use mindplay\middleman\Dispatcher;
+use mindplay\middleman\InteropResolver;
+
 require '../vendor/autoload.php';
 
 // Get ServerRequestInterface object.
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
 // Boot application.
-$controller = new Demo7\Controller();
+/* @var Interop\Container\ContainerInterface $container */
+$container = require 'container.php';
+$router = require 'router.php';
 
-$middleware1 = new \Psr7Middlewares\Middleware\BasicAuthentication(['phpuk' => 'newrelic']);
-$router = [$controller, 'index'];
-
-$builder = new \Relay\RelayBuilder();
-$app = $builder->newInstance([
-    $middleware1,
+$middlewares = [
+    Psr7Middlewares\Middleware\BasicAuthentication::class,
     // ... more middlewares
     $router,
-]);
+];
+
+$dispatcher = new Dispatcher($middlewares, new InteropResolver($container));
 
 // Let application do the magic.
-$response = $app($request, new \Zend\Diactoros\Response());
+$response = $dispatcher->dispatch($request, new Zend\Diactoros\Response());
 
 // Output Response.
 (new Zend\Diactoros\Response\SapiEmitter())->emit($response);

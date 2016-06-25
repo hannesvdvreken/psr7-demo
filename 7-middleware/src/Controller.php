@@ -1,15 +1,15 @@
 <?php
 namespace Demo7;
 
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Controller
 {
-    public function index(RequestInterface $request, ResponseInterface $response)
+    public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $response->getBody()->write("<h1>".(string) $request->getUri()."</h1>");
+        $response->getBody()->write('Hello DPC!');
 
-        return $response->withHeader('Content-Type', 'text/html');
+        return $response;
     }
 }
